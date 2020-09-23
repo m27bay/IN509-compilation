@@ -1,0 +1,76 @@
+let
+
+  /* Read a positive integer from the standard input.
+     Returns -1 on error */
+  function read_unsigned() : int =
+
+    let
+
+      var charRead : string := getchar()
+      var readNumberTmp : int := ord( charRead )
+      var readNumberGlobal : int := 0
+
+    in
+
+      /* charRead is a numerical char */
+      if readNumberTmp >= 48 & readNumberTmp <= 57
+      then
+      (
+        /* MAJ number global */
+        readNumberGlobal := readNumberTmp - 48;
+
+        charRead := getchar();
+
+        /* Read all char */
+        while charRead <> "\n" do
+        (
+
+          /* Convert current char */
+          readNumberTmp := ord( charRead );
+
+          /* charRead is a numerical char */
+          if readNumberTmp >= 48 & readNumberTmp <= 57
+          then
+          (
+            /* MAJ number global */
+            readNumberTmp := readNumberTmp - 48;
+            readNumberGlobal := readNumberGlobal * 10 + readNumberTmp
+          )
+          else
+          (
+            /* Error on the current char */
+            /*
+            print("Error1 with : ");
+            print( charRead );
+            print("\n");
+            */
+            readNumberGlobal := -1
+          );
+
+          charRead := getchar()
+        );
+
+        /* Return */
+        readNumberGlobal
+      )
+      else
+      (
+        /* Error on the first char */
+        /*
+        print("Error2 with : ");
+        print( charRead );
+        print("\n");
+        */
+        -1
+      )
+
+    end
+
+  var a : int := read_unsigned()
+
+in
+
+  print_int(a*2);
+  print("\n")
+
+end
